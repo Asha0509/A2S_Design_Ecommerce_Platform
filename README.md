@@ -1,98 +1,151 @@
-# A2S - Aesthetics To Spaces 
- 
-India design execution infrastructure for home interiors. 
- 
-## A2S Brief 
-A2S helps users go from design intent to real products faster. 
-Users select room type, budget, and aesthetic, then get curated products with source links. 
- 
-At launch, A2S focuses on three outcomes: 
-- Structured room-wise catalog discovery 
-- Cross-platform price visibility 
-- AI-assisted shortlisting based on constraints 
- 
-## Setup 
- 
-### Prerequisites 
-- Node.js 18+ 
-- Java 17+ 
-- Maven 3.9+ 
-- Python 3.10+ 
- 
-### 1. Clone 
-```bash 
-git clone https://github.com/Asha0509/A2S_beta_v1.git 
-cd A2S_beta_v1 
+# A2S - AI Interior Design Recommendation Platform
+
+Full-stack AI-powered recommendation system for interior product discovery, filtering, and planning.
+
+## Project Summary
+
+This project is built as a production-style multi-service platform with:
+- A React frontend for user interaction and visualization
+- A Spring Boot backend for API orchestration and security
+- A Python LLM engine for conversational intent handling and recommendation logic
+- A structured product catalog pipeline for filtering and ranking
+
+The system supports natural-language queries and converts them into structured constraints (room, budget, style, dimensions, etc.) to return relevant product recommendations.
+
+## Core Features
+
+- Conversational recommendation assistant with context memory
+- Multi-criteria catalog filtering and weighted ranking
+- Cross-module integration between UI, backend APIs, and AI service
+- Product visualization pages, gallery workflows, and 3D workspace modules
+- Error boundaries, validation layers, and reusable service abstractions
+
+## System Architecture
+
+The platform follows a layered architecture:
+
+1. Presentation Layer (`frontend/`)
+- React + Vite application
+- Page-level workflows (home, dashboard, design details, AI consultant, 3D space)
+- Reusable UI components and client-side state utilities
+
+2. Service/API Layer (`backend/`)
+- Spring Boot REST controllers
+- Authentication and user flows
+- Product and design endpoints
+- Security configuration and JWT support
+
+3. Intelligence Layer (`LLM/`)
+- Prompt-driven agent orchestration
+- Context manager for multi-turn interactions
+- Request-to-filter extraction and response generation
+
+4. Data Layer (`LLM/data/`, `cleaned_dataset.xlsx`)
+- Catalog ingestion and normalization
+- Filter engine for structured constraint matching
+- Ranker for relevance scoring and top-N recommendations
+
+## Workflow Overview
+
+### End-to-End Request Flow
+
+1. User enters query in frontend (example: budget + room + style).
+2. Frontend sends request through service adapters.
+3. Backend validates/authenticates request and routes to AI/data logic.
+4. LLM module interprets natural language into structured filters.
+5. Data pipeline applies filters and ranking on catalog data.
+6. Ranked products and explanation response are returned.
+7. Frontend renders results as cards, detail views, and related workflows.
+
+### Conversation + Filtering Workflow
+
+1. Current user message is appended to session context.
+2. Agent merges prior context with new intent.
+3. Filters are resolved (numeric + categorical + optional free-text).
+4. Candidate products are scored and sorted.
+5. Formatted response and product list are returned to UI.
+
+## Repository Structure
+
+```text
+.
+|-- backend/
+|   |-- src/main/java/com/a2s/backend/
+|   |   |-- controller/
+|   |   |-- model/
+|   |   |-- repository/
+|   |   `-- security/
+|   |-- src/main/resources/
+|   `-- pom.xml
+|-- frontend/
+|   |-- components/
+|   |-- pages/
+|   |-- services/
+|   |-- hooks/
+|   `-- package.json
+|-- LLM/
+|   |-- agent/
+|   |-- data/
+|   |-- scraper/
+|   |-- utils/
+|   `-- requirements.txt
+|-- cleaned_dataset.xlsx
+|-- run.bat
+`-- README.md
 ```
- 
-### 2. Frontend 
-```bash 
-cd frontend 
-npm install 
-npm run dev 
-``` 
- 
-### 3. Backend 
-```bash 
-cd backend 
-mvn clean install 
-mvn spring-boot:run 
-``` 
- 
-### 4. LLM Service 
-```bash 
-cd LLM 
-pip install -r requirements.txt 
-python app.py 
-``` 
- 
-### Environment Files 
-Create local env files as required: 
-- .env 
-- backend/.env 
-- frontend/.env or frontend/.env.local 
-Keep secrets out of version control.
- 
-## A2S in Detail 
- 
-### Problem A2S Solves 
-- Discovery is fragmented across many furniture platforms. 
-- Price comparison is manual and time-consuming. 
-- Users struggle to map budget to complete room shortlists. 
- 
-### Product Strategy 
-Phase 1 builds the intelligence foundation; Phase 2 adds execution infrastructure. 
- 
-#### Phase 1: Intelligence Foundation 
-- Room-specific product catalog (28,000+ at launch) 
-- Budget and aesthetic filters 
-- Cross-platform price intelligence 
-- AI design consultant for natural-language planning 
-- Source-and-shop links for direct purchase intent 
- 
-#### Phase 2: Execution Intelligence 
-- Video-to-3D spatial reconstruction 
-- Verified vendor sourcing engine (50+ vendors) 
-- Artisan cloud for custom work 
-- AR live placement and turnkey execution workflows 
- 
-### Revenue Model 
-- Early stage: affiliate commissions, premium AI features, data insights 
-- Scale stage: sourcing fees, artisan commissions, execution management fees 
- 
-### Roadmap Highlights 
-- March 2026: 28,000+ product launch 
-- Q2 2026: price intelligence engine 
-- Q3 2026: AI consultant v1 
-- Q1 2027: 3D staging integration 
-- Q3 2027 onward: sourcing and execution modules 
- 
-### Repository Architecture 
-- frontend/: React + Vite product experience 
-- backend/: Spring Boot APIs and orchestration 
-- LLM/: AI agent, data modules, and scrapers 
-- cleaned_dataset.xlsx: current curated catalog dataset 
- 
-### Notes 
-- This README reflects startup positioning for A2S - Aesthetics To Spaces. 
-- Strategic market and roadmap figures are based on your executive summary document.
+
+## Technology Stack
+
+- Frontend: React, Vite, JavaScript
+- Backend: Java, Spring Boot, Maven
+- AI Layer: Python, prompt-based LLM orchestration
+- Data Processing: Python (filtering, ranking, transformation)
+- Security: JWT-based authentication modules
+
+## Local Setup
+
+### Prerequisites
+
+- Node.js 18+
+- Java 17+
+- Maven 3.9+
+- Python 3.10+
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/Asha0509/A2S_Design_Ecommerce_Platform.git
+cd A2S_Design_Ecommerce_Platform
+```
+
+### 2. Run Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+### 3. Run Backend
+
+```bash
+cd backend
+mvn clean install
+mvn spring-boot:run
+```
+
+### 4. Run LLM Service
+
+```bash
+cd LLM
+pip install -r requirements.txt
+python app.py
+```
+
+## Engineering Highlights (Resume-Oriented)
+
+- Designed and integrated a multi-service architecture across React, Spring Boot, and Python AI modules.
+- Implemented context-aware recommendation workflows with structured filter extraction and ranking.
+- Built modular frontend systems (pages/components/services/hooks) for maintainable UI scaling.
+- Developed backend security and API layers for authentication, product, and user-centric flows.
+- Organized data ingestion, filtering, and ranking pipeline for recommendation relevance.
